@@ -1,5 +1,6 @@
 FROM php:5.6-apache
 
+# @see https://github.com/docker-library/wordpress
 # install the PHP extensions we need
 RUN apt-get update && apt-get install -y libpng12-dev libjpeg-dev && rm -rf /var/lib/apt/lists/* \
 	&& docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
@@ -30,8 +31,6 @@ COPY 000-default.conf /etc/apache2/sites-available/
 
 VOLUME /var/www/html
 
-# ENV PHPMYADMIN_VERSION 4.6.1
-# ENV WORDPRESS_SHA1 027e065d30a64720624a7404a1820e6c6fff1202
 
 # Include keyring to verify download
 COPY phpmyadmin.keyring /tmp/
