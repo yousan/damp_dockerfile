@@ -1,6 +1,8 @@
+# @see https://github.com/phpmyadmin/docker
+# @see http://qiita.com/namutaka/items/f6a574f75f0997a1bb1d#data-volume-container
 FROM alpine:3.4
 
-VOLUME /var/www/html
+VOLUME /www/
 
 # Include keyring to verify download
 COPY phpmyadmin.keyring /

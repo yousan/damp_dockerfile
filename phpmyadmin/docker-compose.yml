@@ -1,0 +1,22 @@
+version: '2'
+
+#build: # https://docs.docker.com/compose/compose-file/#/build
+#  context: .
+#  dockerfile: Dockerfile
+
+services:
+  phpmyadmin:
+    build: # https://docs.docker.com/compose/compose-file/#/build
+      context: .
+      dockerfile: Dockerfile
+    #image: yousan/phpmyadmin
+    command:
+      mkdir /tmp/hoge
+    volumes:
+      - /www
+      - /tmp/hoge
+
+  alpine:
+    image: alpine:3.4
+    volumes_from:
+      - phpmyadmin
