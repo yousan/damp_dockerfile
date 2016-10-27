@@ -1,11 +1,12 @@
 language: bash
+
 services: docker
 
+notifications:
+  slack:
+    secure: hcrxkbePwnijGLrcZZ3mW0vPm/wwwwawUEaueLW+qa6CxTZ7aFufS2vrmV8inaXyuoprcF25hyY4om1F4NAz7kLPnAO2xbRXmA44VZwVybvJ9e69vg9fYa+kEVNmao5jGf81LkV+zOidK4jwj8SIeCWpdeWSzl5/UcWvHGQoqz9pQDSKhSDhWHBpRCqWzfgEUW8FBgXytm4CbVqkeDXq2jvXALLmaS4VFbESVCSO1RoTiZst/eLe9JD+5Xy7krAEsABR3lyYtC6xYXZ0kLxGGAgxPdVewGMK7OhLrxB9zC8KRI7OdifV7CHgWDeYFmL40zlVFRynotXm8yxL3/lGPKKkln49daBKclKz3kqXedZzikm51eOIN7uwJzADPUtZnPct4MJIwd62sKElKLg94ExE8OMxvUa1j8+e/9OEDAZRl6VhhsNXSr3sy0f539CmT1YSd7ydEogeQIODZXuFMBh2rZeuTlymnC2VVjelzurJeGWlgBVbAwc9FDTeaoVDu95sYEYM8UZmmaZ9Hd+1Ccuezwf0IwP8tArsddFDivoMwM/DPzARYPhL4LlOydIQxjdGcW4UY1g28jSrW8kt+4WKX8HjkoU1+mQkBAribIzJ7Y2O7RyuymkhkFdNMl5vSh4dpiomh/Nr30LFwJsyBXFdGpwPF/O9aJJOdIAy3wA=
+
 env:
-#  - VARIANT=php5.6/apache
-#  - VARIANT=php5.6/fpm
-#  - VARIANT=php7.0/apache
-#  - VARIANT=php7.0/fpm
   - VARIANT=php5.6/apache
 
 install:
@@ -22,3 +23,4 @@ script:
 
 after_script:
   - docker images
+
