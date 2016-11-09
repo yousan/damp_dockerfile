@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
-# VERSION=0.6
+if [ -z ${VERSION} ]; then
+  echo "Please set \$VERSION";
+  exit
+fi
 cd -- "$(dirname "$BASH_SOURCE")"
 cd ../phpmyadmin
 docker build -t yousan/phpmyadmin:${VERSION} -f Dockerfile .
