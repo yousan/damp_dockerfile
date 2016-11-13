@@ -1,6 +1,6 @@
 FROM php:5.6-apache
 
-# @see https://github.com/docker-library/wordpress
+# @link https://github.com/docker-library/wordpress
 # install the PHP extensions we need
 RUN apt-get update && apt-get install -y libpng12-dev libjpeg-dev && rm -rf /var/lib/apt/lists/* \
 	&& docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
@@ -29,13 +29,14 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 40976EAF437D05B5 &&
 ENV TERM=xterm
 COPY 000-default.conf /etc/apache2/sites-available/
 
+
 VOLUME /var/www/html
 
 
 # Include keyring to verify download
 COPY phpmyadmin.keyring /tmp/
 
-# Calculate download URL
+# Install phpMyAdmin from here
 ENV VERSION 4.6.4
 ENV URL https://files.phpmyadmin.net/phpMyAdmin/${VERSION}/phpMyAdmin-${VERSION}-all-languages.tar.gz
 
@@ -75,3 +76,5 @@ RUN /var/www/pma.dev/run.sh
 # ENTRYPOINT resets CMD
 # ENTRYPOINT ["docker-entrypoint.sh"]
 # CMD ["apache2-foreground"]
+
+RUN sed -i 's/	AllowOverride None/	AllowOverride All/' /etc/apache2/apache2.conf

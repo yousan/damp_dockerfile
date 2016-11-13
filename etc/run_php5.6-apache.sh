@@ -5,5 +5,5 @@ if [ -z ${VERSION} ]; then
 fi
 docker run -p 80:80/tcp \
   -v ~/public_html:/var/www/vhosts \
-  -v ~/git:~/git \
+  -v ~/git:/root/git \
   -i -t yousan/php5.6-apache:${VERSION} /bin/bash

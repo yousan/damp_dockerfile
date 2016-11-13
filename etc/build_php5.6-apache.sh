@@ -6,3 +6,4 @@ fi
 cd -- "$(dirname "$BASH_SOURCE")"
 cd ../php5.6/apache/
 docker build -t yousan/php5.6-apache:${VERSION} -f Dockerfile .
+docker images | grep yousan/php5.6-apache:${VERSION}

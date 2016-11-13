@@ -25,7 +25,7 @@ services:
 #      - /var/lib/mysql:/var/lib/mysql
 
   dnsmasq.dev:
-    image: yousan/dnsmasq
+    image: yousan/dnsmasq:0.8
     ports:
       - 53:53/tcp
       - 53:53/udp
