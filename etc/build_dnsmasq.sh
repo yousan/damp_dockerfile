@@ -4,5 +4,5 @@ if [ -z ${VERSION} ]; then
   exit
 fi
 cd -- "$(dirname "$BASH_SOURCE")"
-cd ../phpmyadmin
-docker build -t yousan/phpmyadmin:${VERSION} -f Dockerfile .
+cd ../dnsmasq/
+docker build -t yousan/dnsmasq:${VERSION} -f Dockerfile .
