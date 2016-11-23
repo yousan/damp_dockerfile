@@ -2,10 +2,12 @@ FROM php:5.6-apache
 
 # @link https://github.com/docker-library/wordpress
 # install the PHP extensions we need
-RUN apt-get update && apt-get install -y libpng12-dev libjpeg-dev && rm -rf /var/lib/apt/lists/* \
+RUN apt-get update && apt-get install -y libpng12-dev libjpeg-dev libcurl4-openssl-dev && rm -rf /var/lib/apt/lists/* \
 	&& docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
 	&& docker-php-ext-install gd mysqli opcache
 
+# @link https://github.com/docker-library/php/issues/331#issuecomment-261016528   Really thanks
+RUN docker-php-ext-install curl mysqli pdo pdo_mysql zip
 
 # set recommended PHP.ini settings
 # see https://secure.php.net/manual/en/opcache.installation.php
@@ -20,6 +22,8 @@ RUN { \
 
 RUN a2enmod rewrite expires vhost_alias
 
+# Install 'emacs' and 'less' for development
+## I MUST remove those lines when deplyoing at the future
 ADD sources.list /etc/apt/
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 40976EAF437D05B5 && \
     apt-get update && \
@@ -27,16 +31,16 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 40976EAF437D05B5 &&
     emacs-nox \
     less
 ENV TERM=xterm
-COPY 000-default.conf /etc/apache2/sites-available/
 
+
+COPY 000-default.conf /etc/apache2/sites-available/
 
 VOLUME /var/www/html
 
 
+# Install phpMyAdmin from here
 # Include keyring to verify download
 COPY phpmyadmin.keyring /tmp/
-
-# Install phpMyAdmin from here
 ENV VERSION 4.6.4
 ENV URL https://files.phpmyadmin.net/phpMyAdmin/${VERSION}/phpMyAdmin-${VERSION}-all-languages.tar.gz
 
