@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+cp /tmp/php/* /usr/local/etc/php/conf.d/
+
 if [[ "$1" == apache2* ]] || [ "$1" == php-fpm ]; then
 	: "${WORDPRESS_DB_HOST:=mysql}"
 	# if we're linked to MySQL and thus have credentials already, let's use them
