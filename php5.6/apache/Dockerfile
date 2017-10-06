@@ -53,7 +53,8 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 40976EAF437D05B5 &&
     apt-get update && \
     apt-get install -y \
     emacs-nox \
-    less
+    less \
+    composer
 ENV TERM=xterm
 
 
