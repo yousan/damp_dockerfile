@@ -30,7 +30,7 @@ RUN apt-get update \
   && docker-php-ext-install intl
 
 # @link https://github.com/docker-library/php/issues/77#issuecomment-88936146
-RUN pecl install -o -f xdebug \
+RUN pecl install -o -f xdebug; \
 echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20131226/xdebug.so" > /usr/local/etc/php/conf.d/pecl-xdebug.ini
 
 # set recommended PHP.ini settings
