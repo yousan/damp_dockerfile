@@ -25,13 +25,14 @@ RUN apt-get update && apt-get install -y \
 
 # @link https://github.com/docker-library/php/issues/57
 RUN apt-get update \
-  && apt-get install -y zlib1g-dev libicu-dev g++ php-intl php-mbstring php-xml php-zip \
+  && apt-get install -y zlib1g-dev libicu-dev g++ \
   && docker-php-ext-configure intl \
   && docker-php-ext-install intl
 
+
 # @link https://github.com/docker-library/php/issues/77#issuecomment-88936146
 RUN pecl install -o -f xdebug && \
-echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20131226/xdebug.so" > /usr/local/etc/php/conf.d/pecl-xdebug.ini
+  echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20131226/xdebug.so" > /usr/local/etc/php/conf.d/pecl-xdebug.ini
 
 # set recommended PHP.ini settings
 # see https://secure.php.net/manual/en/opcache.installation.php
@@ -50,11 +51,10 @@ RUN a2enmod rewrite expires vhost_alias
 ## I MUST remove those lines when deplyoing at the future
 ADD sources.list /etc/apt/
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 40976EAF437D05B5 && \
-    apt-get update && \
-    apt-get install -y \
-    emacs-nox \
-    less \
-    composer
+    apt-get update
+# for CakePHP
+RUN apt-get install -y emacs-nox less composer php-intl php-mbstring php-xml php-zip
+
 ENV TERM=xterm
 
 
