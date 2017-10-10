@@ -25,12 +25,12 @@ RUN apt-get update && apt-get install -y \
 
 # @link https://github.com/docker-library/php/issues/57
 RUN apt-get update \
-  && apt-get install -y zlib1g-dev libicu-dev g++ \
+  && apt-get install -y zlib1g-dev libicu-dev g++ php-intl php-mbstring php-xml php-zip \
   && docker-php-ext-configure intl \
   && docker-php-ext-install intl
 
 # @link https://github.com/docker-library/php/issues/77#issuecomment-88936146
-RUN pecl install -o -f xdebug; \
+RUN pecl install -o -f xdebug && \
 echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20131226/xdebug.so" > /usr/local/etc/php/conf.d/pecl-xdebug.ini
 
 # set recommended PHP.ini settings
