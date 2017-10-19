@@ -53,7 +53,8 @@ ADD sources.list /etc/apt/
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 40976EAF437D05B5 && \
     apt-get update
 # for CakePHP
-RUN apt-get install -y emacs-nox less composer php-intl php-mbstring php-xml php-zip
+RUN apt-get install -y emacs-nox less composer
+RUN apt-get install -y mysql-client postgresql-client php-intl php-mbstring php-xml php-zip
 
 ENV TERM=xterm
 
