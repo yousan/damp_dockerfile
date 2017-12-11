@@ -2,7 +2,7 @@ version: '2'
 
 services:
 
-  php5.6-apache.dev:
+  php5.6-apache.test:
     image: yousan/php5.6-apache
     ports:
       - 80:80
@@ -15,7 +15,7 @@ services:
       PMA_USER: root
       PMA_PASSWORD: example
 
-  mysql.dev:
+  mysql.test:
     image: mariadb
     environment:
       MYSQL_ROOT_PASSWORD: example
@@ -24,7 +24,7 @@ services:
 #    volumes:
 #      - /var/lib/mysql:/var/lib/mysql
 
-  dnsmasq.dev:
+  dnsmasq.test:
     image: yousan/dnsmasq:0.8
     ports:
       - 53:53/tcp
