@@ -2,7 +2,7 @@ FROM php:5.6-apache
 
 # @link https://github.com/docker-library/wordpress
 # install the PHP extensions we need
-RUN apt-get update && apt-get install -y libpng12-dev libjpeg-dev libcurl4-openssl-dev && rm -rf /var/lib/apt/lists/* \
+RUN apt-get update && apt-get install -y libpng12-test libjpeg-test libcurl4-openssl-test && rm -rf /var/lib/apt/lists/* \
 	&& docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
 	&& docker-php-ext-install gd mysqli opcache
 
@@ -12,12 +12,12 @@ RUN docker-php-ext-install curl mysqli opcache pdo pdo_mysql zip
 # @link https://hub.docker.com/r/plab/docker-php/~/dockerfile/
 RUN apt-get update && apt-get install -y \
 	bzip2 \
-	libbz2-dev \
-	libfreetype6-dev \
-	libjpeg62-turbo-dev \
-	libmcrypt-dev \
-	libpng12-dev \
-	libghc-postgresql-libpq-dev \
+	libbz2-test \
+	libfreetype6-test \
+	libjpeg62-turbo-test \
+	libmcrypt-test \
+	libpng12-test \
+	libghc-postgresql-libpq-test \
 	&& docker-php-ext-install mcrypt mbstring bz2 zip \
 	&& docker-php-ext-configure gd -with-freetype-dir=/usr/include/ -with-jpeg-dir=/usr/include/ \
 	&& docker-php-ext-configure pgsql -with-pgsql=/usr/include/postgresql/ \
@@ -25,7 +25,7 @@ RUN apt-get update && apt-get install -y \
 
 # @link https://github.com/docker-library/php/issues/57
 RUN apt-get update \
-  && apt-get install -y zlib1g-dev libicu-dev g++ \
+  && apt-get install -y zlib1g-test libicu-test g++ \
   && docker-php-ext-configure intl \
   && docker-php-ext-install intl
 
@@ -47,7 +47,7 @@ RUN { \
 
 RUN a2enmod rewrite expires vhost_alias
 
-# Install 'emacs' and 'less' for development
+# Install 'emacs' and 'less' for testelopment
 ## I MUST remove those lines when deplyoing at the future
 ADD sources.list /etc/apt/
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 40976EAF437D05B5 && \
@@ -80,18 +80,18 @@ RUN set -x \
     && rm -rf "$GNUPGHOME" \
     && tar xzf phpMyAdmin.tar.gz \
     && rm -f phpMyAdmin.tar.gz phpMyAdmin.tar.gz.asc \
-    && mv phpMyAdmin-$VERSION-all-languages /var/www/pma.dev \
-    && rm -rf /var/www/pma.dev/js/jquery/src/ /var/www/pma.dev/js/openlayers/src/ /var/www/pma.dev/setup/ /var/www/pma.dev/sql/ /var/www/pma.dev/examples/ /var/www/pma.dev/test/ /var/www/pma.dev/po/ \
-    && chown -R www-data:www-data /var/www/pma.dev \
-    && find /var/www/pma.dev -type d -exec chmod 750 {} \; \
-    && find /var/www/pma.dev -type f -exec chmod 640 {} \;
+    && mv phpMyAdmin-$VERSION-all-languages /var/www/pma.test \
+    && rm -rf /var/www/pma.test/js/jquery/src/ /var/www/pma.test/js/openlayers/src/ /var/www/pma.test/setup/ /var/www/pma.test/sql/ /var/www/pma.test/examples/ /var/www/pma.test/test/ /var/www/pma.test/po/ \
+    && chown -R www-data:www-data /var/www/pma.test \
+    && find /var/www/pma.test -type d -exec chmod 750 {} \; \
+    && find /var/www/pma.test -type f -exec chmod 640 {} \;
 
-COPY config.inc.php /var/www/pma.dev/
+COPY config.inc.php /var/www/pma.test/
 # Copy main script
-COPY run.sh /var/www/pma.dev/run.sh
-RUN chmod u+rwx /var/www/pma.dev/run.sh
+COPY run.sh /var/www/pma.test/run.sh
+RUN chmod u+rwx /var/www/pma.test/run.sh
 
-RUN /var/www/pma.dev/run.sh
+RUN /var/www/pma.test/run.sh
 
 #RUN set -x \
 #	&& curl -o wordpress.tar.gz -fSL "https://wordpress.org/wordpress-${WORDPRESS_VERSION}.tar.gz" \
